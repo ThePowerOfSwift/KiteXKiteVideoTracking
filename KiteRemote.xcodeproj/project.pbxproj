@@ -13,7 +13,58 @@
 		9F0909261D2C08850052FB58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909251D2C08850052FB58 /* Assets.xcassets */; };
 		9F0909291D2C08860052FB58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909271D2C08860052FB58 /* LaunchScreen.storyboard */; };
 		9F0909311D2D26FA0052FB58 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0909301D2D26F90052FB58 /* Starscream.framework */; };
+		9F09093F1D2FE5BE0052FB58 /* RemoteBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F09093E1D2FE5BE0052FB58 /* RemoteBase.swift */; };
+		9F0909421D2FEA5D0052FB58 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0909391D2FE4AE0052FB58 /* GPUImage.framework */; };
+		9F0909431D2FEA5D0052FB58 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0909391D2FE4AE0052FB58 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9F0909481D2FEF670052FB58 /* VideoProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0909471D2FEF670052FB58 /* VideoProcessing.swift */; };
+		9F09094B1D2FF2B50052FB58 /* PositionColor.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909491D2FF2B50052FB58 /* PositionColor.fsh */; };
+		9F09094C1D2FF2B50052FB58 /* ThresholdShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F09094A1D2FF2B50052FB58 /* ThresholdShader.fsh */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9F0909381D2FE4AE0052FB58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCD1B1251C66A262001F2BDC;
+			remoteInfo = GPUImage;
+		};
+		9F09093A1D2FE4AE0052FB58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCD1B12F1C66A262001F2BDC;
+			remoteInfo = GPUImageTests;
+		};
+		9F09093C1D2FE4CD0052FB58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCD1B1241C66A262001F2BDC;
+			remoteInfo = GPUImage;
+		};
+		9F0909441D2FEA5D0052FB58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCD1B1241C66A262001F2BDC;
+			remoteInfo = GPUImage;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9F0909461D2FEA5D0052FB58 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9F0909431D2FEA5D0052FB58 /* GPUImage.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9F09091B1D2C08850052FB58 /* KiteRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiteRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +75,11 @@
 		9F0909281D2C08860052FB58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F09092A1D2C08860052FB58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F0909301D2D26F90052FB58 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "GPUImage-iOS.xcodeproj"; path = "GPUImage2/framework/GPUImage-iOS.xcodeproj"; sourceTree = "<group>"; };
+		9F09093E1D2FE5BE0052FB58 /* RemoteBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteBase.swift; sourceTree = "<group>"; };
+		9F0909471D2FEF670052FB58 /* VideoProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoProcessing.swift; sourceTree = "<group>"; };
+		9F0909491D2FF2B50052FB58 /* PositionColor.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionColor.fsh; sourceTree = "<group>"; };
+		9F09094A1D2FF2B50052FB58 /* ThresholdShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ThresholdShader.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0909311D2D26FA0052FB58 /* Starscream.framework in Frameworks */,
+				9F0909421D2FEA5D0052FB58 /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +98,7 @@
 		9F0909121D2C08850052FB58 = {
 			isa = PBXGroup;
 			children = (
+				9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */,
 				9F0909301D2D26F90052FB58 /* Starscream.framework */,
 				9F09091D1D2C08850052FB58 /* KiteRemote */,
 				9F09091C1D2C08850052FB58 /* Products */,
@@ -58,14 +116,35 @@
 		9F09091D1D2C08850052FB58 /* KiteRemote */ = {
 			isa = PBXGroup;
 			children = (
+				9F09094D1D2FF2BC0052FB58 /* Shaders */,
 				9F09091E1D2C08850052FB58 /* AppDelegate.swift */,
 				9F0909201D2C08850052FB58 /* ViewController.swift */,
 				9F0909221D2C08850052FB58 /* Main.storyboard */,
 				9F0909251D2C08850052FB58 /* Assets.xcassets */,
 				9F0909271D2C08860052FB58 /* LaunchScreen.storyboard */,
 				9F09092A1D2C08860052FB58 /* Info.plist */,
+				9F09093E1D2FE5BE0052FB58 /* RemoteBase.swift */,
+				9F0909471D2FEF670052FB58 /* VideoProcessing.swift */,
 			);
 			path = KiteRemote;
+			sourceTree = "<group>";
+		};
+		9F0909341D2FE4AD0052FB58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9F0909391D2FE4AE0052FB58 /* GPUImage.framework */,
+				9F09093B1D2FE4AE0052FB58 /* GPUImageTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9F09094D1D2FF2BC0052FB58 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				9F0909491D2FF2B50052FB58 /* PositionColor.fsh */,
+				9F09094A1D2FF2B50052FB58 /* ThresholdShader.fsh */,
+			);
+			name = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -79,10 +158,13 @@
 				9F0909181D2C08850052FB58 /* Frameworks */,
 				9F0909191D2C08850052FB58 /* Resources */,
 				9F0909321D2D271F0052FB58 /* ShellScript */,
+				9F0909461D2FEA5D0052FB58 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9F09093D1D2FE4CD0052FB58 /* PBXTargetDependency */,
+				9F0909451D2FEA5D0052FB58 /* PBXTargetDependency */,
 			);
 			name = KiteRemote;
 			productName = KiteRemote;
@@ -115,6 +197,12 @@
 			mainGroup = 9F0909121D2C08850052FB58;
 			productRefGroup = 9F09091C1D2C08850052FB58 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9F0909341D2FE4AD0052FB58 /* Products */;
+					ProjectRef = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9F09091A1D2C08850052FB58 /* KiteRemote */,
@@ -122,14 +210,33 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		9F0909391D2FE4AE0052FB58 /* GPUImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GPUImage.framework;
+			remoteRef = 9F0909381D2FE4AE0052FB58 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9F09093B1D2FE4AE0052FB58 /* GPUImageTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GPUImageTests.xctest;
+			remoteRef = 9F09093A1D2FE4AE0052FB58 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		9F0909191D2C08850052FB58 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F09094B1D2FF2B50052FB58 /* PositionColor.fsh in Resources */,
 				9F0909291D2C08860052FB58 /* LaunchScreen.storyboard in Resources */,
 				9F0909261D2C08850052FB58 /* Assets.xcassets in Resources */,
 				9F0909241D2C08850052FB58 /* Main.storyboard in Resources */,
+				9F09094C1D2FF2B50052FB58 /* ThresholdShader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,12 +264,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F0909481D2FEF670052FB58 /* VideoProcessing.swift in Sources */,
 				9F0909211D2C08850052FB58 /* ViewController.swift in Sources */,
+				9F09093F1D2FE5BE0052FB58 /* RemoteBase.swift in Sources */,
 				9F09091F1D2C08850052FB58 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9F09093D1D2FE4CD0052FB58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage;
+			targetProxy = 9F09093C1D2FE4CD0052FB58 /* PBXContainerItemProxy */;
+		};
+		9F0909451D2FEA5D0052FB58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage;
+			targetProxy = 9F0909441D2FEA5D0052FB58 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9F0909221D2C08850052FB58 /* Main.storyboard */ = {
@@ -271,6 +393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -286,6 +409,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -316,6 +440,7 @@
 				9F09092F1D2C08860052FB58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

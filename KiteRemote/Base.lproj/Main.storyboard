@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -15,27 +16,44 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="QgK-2c-fLC">
-                                <rect key="frame" x="18" y="285" width="564" height="31"/>
-                                <connections>
-                                    <action selector="newSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="2Ig-Jx-XHo"/>
-                                </connections>
-                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awK-Gf-0cX" customClass="RenderView" customModule="GPUImage">
+                                <rect key="frame" x="20" y="20" width="473" height="355"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="awK-Gf-0cX" secondAttribute="height" multiplier="4:3" id="qsQ-SC-zjl"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="siQ-6I-ijd">
+                                <rect key="frame" x="617" y="28" width="30" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="YWL-GQ-Q6Z"/>
+                                    <constraint firstAttribute="height" constant="30" id="gHd-Yf-nMa"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QgK-2c-fLC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="02m-Ow-inG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="QgK-2c-fLC" secondAttribute="trailing" id="HYv-hj-Txr"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="QgK-2c-fLC" secondAttribute="leading" id="SdP-7M-Xdz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="siQ-6I-ijd" secondAttribute="trailing" id="4rg-Mf-fjX"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="awK-Gf-0cX" secondAttribute="leading" id="LOb-St-hUH"/>
+                            <constraint firstItem="siQ-6I-ijd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="ObB-g9-qf9"/>
+                            <constraint firstItem="awK-Gf-0cX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="eAc-CI-gDz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="awK-Gf-0cX" secondAttribute="bottom" id="ifz-lM-KWW"/>
                         </constraints>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="colorView" destination="siQ-6I-ijd" id="XeS-s0-He8"/>
+                        <outlet property="renderView" destination="awK-Gf-0cX" id="rSe-JJ-LCD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="387"/>
+            <point key="canvasLocation" x="304.5" y="386.5"/>
         </scene>
     </scenes>
 </document>
