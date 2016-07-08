@@ -12,39 +12,37 @@ import AVFoundation
 
 class VideoProcessing {
     
-    let camera: Camera!
+    private let camera: Camera!
+    private let size = Size(width: 640, height: 480)
     
-    let videoSize = CGSize(width: 640, height: 480)
-    let size = Size(width: 640, height: 480)
+    private let crosshairGenerator: CrosshairGenerator!
+    private let renderView: RenderView!
     
+    private let blend = AlphaBlend()
     
-    let crosshairGenerator: CrosshairGenerator!
-    let renderView: RenderView!
-    
-    let blend = AlphaBlend()
-    
-    let pathPosition = NSBundle.mainBundle().pathForResource("PositionColor", ofType: "fsh")!
-    let pathColor = NSBundle.mainBundle().pathForResource("ThresholdShader", ofType: "fsh")!
-    let positionFilter: BasicOperation!
-    let colorFilter: BasicOperation!
+    private let pathPosition = NSBundle.mainBundle().pathForResource("PositionColor", ofType: "fsh")!
+    private let pathColor = NSBundle.mainBundle().pathForResource("ThresholdShader", ofType: "fsh")!
+    private let positionFilter: BasicOperation!
+    private let colorFilter: BasicOperation!
 
+    private let rawOut = RawDataOutput()
+    private let positionOut = RawDataOutput()
+
+    var newXPos: (Float -> Void)?
     
-    let rawOut = RawDataOutput()
-    let positionOut = RawDataOutput()
     
     init(renderView: RenderView) {
 
         self.renderView = renderView
+        renderView.orientation = .LandscapeRight
+
         crosshairGenerator = CrosshairGenerator(size: size)
         crosshairGenerator.crosshairWidth = 15
-        
+
         do {
             positionFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathPosition))
             colorFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathColor))
-            
             camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
-            renderView.orientation = .LandscapeRight
-//            camera --> filter --> renderView
         } catch {
             fatalError("Could not initialize rendering pipeline: \(error)")
         }
@@ -55,7 +53,7 @@ class VideoProcessing {
             
             let N = Int(self.size.height*self.size.width)
             
-            var sumAlpha: Int = 0
+            var sumAlpha: Int = 0 // FIXME: Concider using accelerate for sumation.
             var sumRed: Int = 0
             var sumGreen: Int = 0
             for i in 0..<N {
@@ -66,9 +64,11 @@ class VideoProcessing {
             
             let x = Float(sumRed)/Float(sumAlpha)
             let y = Float(sumGreen)/Float(sumAlpha)
-            let intensity = Float(sumAlpha)/Float(N)
+//            let intensity = Float(sumAlpha)/Float(N)
             
-//            print("Position (x,y): \(x),\(y), intensity: \(intensity)")
+            if let newXPos = self.newXPos where !x.isNaN {
+                newXPos(y) // FIXME get x and y in control!
+            }
             
             self.crosshairGenerator.renderCrosshairs([Position(x,y)])
         }
@@ -110,7 +110,7 @@ class VideoProcessing {
                 callback( CIColor(red: toCGF(red), green: toCGF(green), blue: toCGF(blue) ) )
             })
             
-            self.rawOut.dataAvailableCallback = nil
+            self.rawOut.dataAvailableCallback = nil // disable callback right away
         }
     }
     
@@ -122,7 +122,6 @@ class VideoProcessing {
         colorFilter.uniformSettings["red"] = Float(color.red)
         colorFilter.uniformSettings["green"] = Float(color.green)
         colorFilter.uniformSettings["blue"] = Float(color.blue)
-    
     }
     
     func setThreshold(threshold: Float) {

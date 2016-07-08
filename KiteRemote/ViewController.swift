@@ -26,12 +26,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         videoProcessing = VideoProcessing(renderView: renderView)
+        videoProcessing.newXPos = { x in
+            self.remote.newPos( Int( (x - 0.5) * 1600*0.5 ) )
+        }
         
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         renderView.addGestureRecognizer(tabGesture)
         let slideGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
         renderView.addGestureRecognizer(slideGesture)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,25 +59,6 @@ class ViewController: UIViewController {
                 self.colorView.backgroundColor = UIColor(CIColor: color)
                 self.videoProcessing.setColor(color)
             }
-            
-//            let tpVideo = CGPoint(
-//                x: round( touchPoint.x / renderView.frame.size.width * videoSize.width ),
-//                y: round( videoSize.height - touchPoint.y / renderView.frame.size.height * videoSize.height ) )
-//            
-//            let c = rawOut.colorAtLocation(tpVideo)
-//            func norm(val: GLubyte) -> Float {
-//                return Float(val)/255
-//            }
-//            let color = UIColor(colorLiteralRed: norm(c.red), green: norm(c.green), blue: norm(c.blue), alpha: norm(c.alpha))
-//            colorView.backgroundColor = color
-//            
-//            var thresholdColor = GPUVector3() // thresholdColor
-//            thresholdColor.one = norm(c.red)
-//            thresholdColor.two = norm(c.green)
-//            thresholdColor.three = norm(c.blue)
-//            
-//            colorFilter.setFloatVec3(thresholdColor, forUniformName: "inputColor")
-//            positionColorFilter.setFloatVec3(thresholdColor, forUniformName: "inputColor")
         }
     }
     
