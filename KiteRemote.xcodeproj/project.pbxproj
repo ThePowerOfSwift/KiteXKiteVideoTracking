@@ -12,6 +12,7 @@
 		9F0909241D2C08850052FB58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909221D2C08850052FB58 /* Main.storyboard */; };
 		9F0909261D2C08850052FB58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909251D2C08850052FB58 /* Assets.xcassets */; };
 		9F0909291D2C08860052FB58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909271D2C08860052FB58 /* LaunchScreen.storyboard */; };
+		9F0909311D2D26FA0052FB58 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0909301D2D26F90052FB58 /* Starscream.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9F0909251D2C08850052FB58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F0909281D2C08860052FB58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F09092A1D2C08860052FB58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F0909301D2D26F90052FB58 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F0909311D2D26FA0052FB58 /* Starscream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +41,7 @@
 		9F0909121D2C08850052FB58 = {
 			isa = PBXGroup;
 			children = (
+				9F0909301D2D26F90052FB58 /* Starscream.framework */,
 				9F09091D1D2C08850052FB58 /* KiteRemote */,
 				9F09091C1D2C08850052FB58 /* Products */,
 			);
@@ -74,6 +78,7 @@
 				9F0909171D2C08850052FB58 /* Sources */,
 				9F0909181D2C08850052FB58 /* Frameworks */,
 				9F0909191D2C08850052FB58 /* Resources */,
+				9F0909321D2D271F0052FB58 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -129,6 +134,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9F0909321D2D271F0052FB58 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9F0909171D2C08850052FB58 /* Sources */ = {
@@ -249,6 +271,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = KiteRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dk.aokholm.KiteRemote;
@@ -260,6 +286,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = KiteRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dk.aokholm.KiteRemote;
