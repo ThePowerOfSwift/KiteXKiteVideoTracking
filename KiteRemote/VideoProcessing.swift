@@ -12,8 +12,9 @@ import AVFoundation
 
 class VideoProcessing {
     
-    private let camera: Camera!
+    //private let camera: Camera!
     private let size = Size(width: 640, height: 480)
+    private let movieInput: MovieInput!
     
     private let crosshairGenerator: CrosshairGenerator!
     private let renderView: RenderView!
@@ -28,6 +29,9 @@ class VideoProcessing {
     private let rawOut = RawDataOutput()
     private let positionOut = RawDataOutput()
 
+    private let moviePosition = NSBundle.mainBundle().pathForResource("IMG_0459", ofType: "MOV")!
+
+    
     var newXPos: (Float -> Void)?
     
     
@@ -42,7 +46,8 @@ class VideoProcessing {
         do {
             positionFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathPosition))
             colorFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathColor))
-            camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
+            movieInput = try MovieInput(url: NSURL(fileURLWithPath: moviePosition), playAtActualSpeed: false, loop: true)
+            //camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
         } catch {
             fatalError("Could not initialize rendering pipeline: \(error)")
         }
@@ -76,14 +81,19 @@ class VideoProcessing {
         setColor(CIColor(red: 1.0, green: 0, blue: 0))
         setThreshold(0.2)
         
-        camera --> rawOut
-        camera --> colorFilter
-        camera --> positionFilter --> positionOut
+//        camera --> rawOut
+//        camera --> colorFilter
+//        camera --> positionFilter --> positionOut
+        movieInput --> rawOut
+        movieInput --> colorFilter
+        movieInput --> positionFilter --> positionOut
+        
         
         colorFilter --> blend
         crosshairGenerator --> blend --> renderView
         
-        camera.startCapture()
+//        camera.startCapture()
+        movieInput.start()
     }
     
     

@@ -15,6 +15,7 @@ class RemoteBase { // FIXME: added reconnect behaviour
     let socket = WebSocket(url: NSURL(string: "ws://192.168.4.1:81/")!)
     
     var lastTime = NSDate()
+    var t: NSTimer!
     
     init() {
         
@@ -22,8 +23,6 @@ class RemoteBase { // FIXME: added reconnect behaviour
             print("got some text: \(text)")
         }
         
-        
-        socket.connect()
         socket.onConnect = {
             print("connected woho!")
         }
@@ -35,8 +34,10 @@ class RemoteBase { // FIXME: added reconnect behaviour
             }
             
         }
-        
-        
+    }
+    
+    func connect() {
+        t = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(self.checkConnection), userInfo: nil, repeats: true)
     }
     
     func newPos(pos: Int) {
@@ -50,5 +51,9 @@ class RemoteBase { // FIXME: added reconnect behaviour
         }
     }
     
-
+    @objc func checkConnection() {
+        if !socket.isConnected {
+            socket.connect()
+        }
+    }
 }
