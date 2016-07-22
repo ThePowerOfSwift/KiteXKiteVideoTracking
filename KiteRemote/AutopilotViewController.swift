@@ -13,31 +13,44 @@ import AVFoundation
 
 class AutopilotViewController: UIViewController {
     
+    let network = Network()
     let remote = RemoteBase()
+    let kite = Kite()
     var videoProcessing: VideoProcessing!
 
     var colorThreshold: Float = 0.5
 
-
     @IBOutlet weak var colorView: UIView!
     
     @IBOutlet weak var renderView: RenderView!
+    @IBOutlet weak var velocity: UILabel!
+    @IBOutlet weak var angular: UILabel!
+
+    var kiteKinematicss = [KiteKinematics]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        remote.connect()
+        //remote.connect()
         
         // Do any additional setup after loading the view, typically from a nib.
-        videoProcessing = VideoProcessing(renderView: renderView)
-        videoProcessing.newXPos = { x in
-            self.remote.newPos( Int( (x - 0.5) * 1600*0.5 ) )
+        videoProcessing = VideoProcessing(renderView: renderView, video: false)
+        videoProcessing.newPosition = { (position, time) in
+            if let kiteKinematics = self.kite.newPosition(position, time: time) {
+                self.kiteKinematicss.append(kiteKinematics)
+                self.velocity.text = String(format: "%.1f m/s", kiteKinematics.velocity.length)
+                self.angular.text = String(format: "%.1f r/s", kiteKinematics.angularVelocity)
+            }
+            
+            self.remote.newPos( Int( (position.x - 0.5) * 1600*0.5 ) )
         }
         
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         renderView.addGestureRecognizer(tabGesture)
         let slideGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
         renderView.addGestureRecognizer(slideGesture)
+        
+        videoProcessing.start()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +61,17 @@ class AutopilotViewController: UIViewController {
     @IBAction func next(sender: UIButton) {
         if let pagevc = self.parentViewController as? KiteRemotePageViewController {
             pagevc.next(self)
+        }
+    }
+
+    @IBAction func switchStateChanged(sender: UISwitch) {
+        if sender.on {
+            videoProcessing.start()
+        } else {
+            videoProcessing.stop()
+            
+            network.sendData( kiteKinematicss.map { $0.json } )
+            kiteKinematicss.removeAll()
         }
     }
     
@@ -80,5 +104,7 @@ class AutopilotViewController: UIViewController {
             videoProcessing.setThreshold(colorThreshold)
         }
     }
+    
+    
 }
 

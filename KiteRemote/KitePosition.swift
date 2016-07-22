@@ -48,9 +48,26 @@ func * (left: Vector3, right: Double) -> Vector3 {
 
 
 struct KiteKinematics {
+    let time: Double
     let position: Vector3
     let velocity: Vector3
     let angularVelocity: Double
+}
+
+extension Vector3 {
+    var json: [Double] {
+        return [x,y,z]
+    }
+}
+
+extension KiteKinematics {
+    var json: NSDictionary {
+        let dict = ["t": time,
+                    "p": position.json,
+                    "v": velocity.json,
+                    "av": angularVelocity]
+        return dict
+    }
 }
 
 class Kite {
@@ -83,7 +100,7 @@ class Kite {
         return Vector3(x: cos(psi)*sin(beta), y: cos(beta), z: sin(psi)*sin(beta))
     }
     
-    func newPos(p: CGPoint, time: Double) -> KiteKinematics? {
+    func newPosition(p: CGPoint, time: Double) -> KiteKinematics? {
         let (beta, psi) = calculateBetaPsi(p)
         let position = normalizedPosition(beta, psi: psi)
         var kinematics: KiteKinematics!
@@ -113,7 +130,7 @@ class Kite {
                     angle = -angle
                 }
                 
-                kinematics = KiteKinematics(position: position*r, velocity: velocity*r, angularVelocity: angle/dT)
+                kinematics = KiteKinematics(time: time, position: position*r, velocity: velocity*r, angularVelocity: angle/dT)
             }
             velocityLast = velocity
         }

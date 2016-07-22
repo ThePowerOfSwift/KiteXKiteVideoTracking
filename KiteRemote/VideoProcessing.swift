@@ -10,11 +10,21 @@ import Foundation
 import GPUImage
 import AVFoundation
 
+extension Size {
+    
+    var transpose: Size {
+        get {
+            return Size(width: height, height: width)
+        }
+    }
+}
+
+
 class VideoProcessing {
     
-    //private let camera: Camera!
+    private let camera: Camera?
     private let size = Size(width: 640, height: 480)
-    private let movieInput: MovieInput!
+    private let movieInput: MovieInput?
     
     private let crosshairGenerator: CrosshairGenerator!
     private let renderView: RenderView!
@@ -32,22 +42,31 @@ class VideoProcessing {
     private let moviePosition = NSBundle.mainBundle().pathForResource("IMG_0459", ofType: "MOV")!
 
     
-    var newXPos: (Float -> Void)?
+    var newPosition: ((CGPoint, Double) -> Void)?
     
-    
-    init(renderView: RenderView) {
+    init(renderView: RenderView, video: Bool) {
 
         self.renderView = renderView
         renderView.orientation = .LandscapeRight
 
-        crosshairGenerator = CrosshairGenerator(size: size)
+        crosshairGenerator = CrosshairGenerator(size: size.transpose)
         crosshairGenerator.crosshairWidth = 15
 
         do {
             positionFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathPosition))
             colorFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathColor))
-            movieInput = try MovieInput(url: NSURL(fileURLWithPath: moviePosition), playAtActualSpeed: false, loop: true)
-            //camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
+            if video {
+                movieInput = try MovieInput(url: NSURL(fileURLWithPath: moviePosition), playAtActualSpeed: false, loop: true)
+                camera = nil
+                renderView.orientation = .Portrait
+            }
+            else {
+                camera = try Camera(sessionPreset:AVCaptureSessionPreset640x480)
+                movieInput = nil
+                renderView.orientation = .LandscapeRight
+
+            }
+            
         } catch {
             fatalError("Could not initialize rendering pipeline: \(error)")
         }
@@ -67,35 +86,67 @@ class VideoProcessing {
                 sumGreen += Int(imageBuffer[4*i+1])
             }
             
-            let x = Float(sumRed)/Float(sumAlpha)
-            let y = Float(sumGreen)/Float(sumAlpha)
+            let x = Double(sumRed)/Double(sumAlpha)
+            let y = Double(sumGreen)/Double(sumAlpha)
 //            let intensity = Float(sumAlpha)/Float(N)
             
-            if let newXPos = self.newXPos where !x.isNaN {
-                newXPos(y) // FIXME get x and y in control!
+            if let newPosition = self.newPosition where !x.isNaN {
+                
+                let time = NSDate.timeIntervalSinceReferenceDate()
+                
+                dispatch_async(dispatch_get_main_queue(),{
+                    
+                    newPosition( CGPoint(x: x, y: y),  time)
+                    
+                })
+                
             }
             
-            self.crosshairGenerator.renderCrosshairs([Position(x,y)])
+            self.crosshairGenerator.renderCrosshairs([Position(Float(x),Float(y))])
         }
         
         setColor(CIColor(red: 1.0, green: 0, blue: 0))
         setThreshold(0.2)
         
-//        camera --> rawOut
-//        camera --> colorFilter
-//        camera --> positionFilter --> positionOut
-        movieInput --> rawOut
-        movieInput --> colorFilter
-        movieInput --> positionFilter --> positionOut
         
+        if let camera = camera {
+            camera --> rawOut
+            camera --> colorFilter
+            camera --> positionFilter --> positionOut
+        }
+
+        if let movieInput = movieInput {
+            movieInput --> rawOut
+            movieInput --> colorFilter
+            movieInput --> positionFilter --> positionOut
+        }
         
         colorFilter --> blend
         crosshairGenerator --> blend --> renderView
         
-//        camera.startCapture()
-        movieInput.start()
     }
     
+    func start() {
+        if let movieInput = movieInput {
+            movieInput.start()
+        }
+        
+        if let camera = camera {
+            camera.startCapture()
+        }
+    }
+    
+    func stop() {
+
+        if let movieInput = movieInput {
+            movieInput.cancel()
+        }
+        
+        if let camera = camera {
+            camera.stopCapture()
+        }
+
+    }
     
     func getColorForPoint(point: CGPoint, callback: (CIColor -> Void)) {
         
