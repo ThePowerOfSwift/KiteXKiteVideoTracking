@@ -17,7 +17,20 @@ class RemoteBase { // FIXME: added reconnect behaviour
     var lastTime = NSDate()
     var t: NSTimer!
     
+    var onData: (Int16 -> Void)?
+    var didConnect: (Bool -> Void)?
+    
+    
     init() {
+        
+        socket.onData = { (data: NSData) in
+            
+            if let onData = self.onData {
+                var numbers = [Int16](count: 1, repeatedValue: 0)
+                data.getBytes(&numbers, length: 2)
+                onData(numbers[0])
+            }
+        }
         
         socket.onText = { (text: String) in
             print("got some text: \(text)")
@@ -25,6 +38,11 @@ class RemoteBase { // FIXME: added reconnect behaviour
         
         socket.onConnect = {
             print("connected woho!")
+            self.socket.writeString("T")
+            if let didConnect = self.didConnect {
+                didConnect(true)
+            }
+            
         }
         socket.onDisconnect = { (err: NSError?) in
             if let err = err {
@@ -32,7 +50,9 @@ class RemoteBase { // FIXME: added reconnect behaviour
             } else {
                 print("disconnected without error")
             }
-            
+            if let didConnect = self.didConnect {
+                didConnect(false)
+            }
         }
     }
     
@@ -41,13 +61,19 @@ class RemoteBase { // FIXME: added reconnect behaviour
     }
     
     func newPos(pos: Int) {
-        if (lastTime.timeIntervalSinceNow < -0.05) {
+        if (lastTime.timeIntervalSinceNow < -0.01) {
             
             if socket.isConnected {
                 socket.writeString(String(pos))
             }
             
             lastTime = NSDate()
+        }
+    }
+    
+    func sendData(data: NSData) {
+        if socket.isConnected {
+            socket.writeData(data)
         }
     }
     

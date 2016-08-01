@@ -17,7 +17,6 @@ class Network {
         let data = try! NSJSONSerialization.dataWithJSONObject(json, options: [])
 
         request.HTTPMethod = "POST"
-//        request.HTTPBody = data
         
         
         let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: data) {
@@ -27,9 +26,10 @@ class Network {
                 print(error)
             }
             
+            if let data = data {
+                print(NSString(data: data, encoding: NSUTF8StringEncoding))
+            }
             
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-
         }
         
         task.resume()

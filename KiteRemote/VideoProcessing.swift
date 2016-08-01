@@ -95,8 +95,7 @@ class VideoProcessing {
                 let time = NSDate.timeIntervalSinceReferenceDate()
                 
                 dispatch_async(dispatch_get_main_queue(),{
-                    
-                    newPosition( CGPoint(x: x, y: y),  time)
+                    newPosition( CGPoint(x: y, y: x),  time) // transpose
                     
                 })
                 

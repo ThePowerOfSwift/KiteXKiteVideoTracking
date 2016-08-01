@@ -25,6 +25,7 @@ class AutopilotViewController: UIViewController {
     @IBOutlet weak var renderView: RenderView!
     @IBOutlet weak var velocity: UILabel!
     @IBOutlet weak var angular: UILabel!
+    @IBOutlet weak var threshold: UILabel!
 
     var kiteKinematicss = [KiteKinematics]()
     
@@ -40,9 +41,11 @@ class AutopilotViewController: UIViewController {
                 self.kiteKinematicss.append(kiteKinematics)
                 self.velocity.text = String(format: "%.1f m/s", kiteKinematics.velocity.length)
                 self.angular.text = String(format: "%.1f r/s", kiteKinematics.angularVelocity)
+                
+                self.remote.sendData(kiteKinematics.data)
             }
             
-            self.remote.newPos( Int( (position.x - 0.5) * 1600*0.5 ) )
+            //self.remote.newPos( Int( (position.x - 0.5) * 1600*0.5 ) )
         }
         
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -50,7 +53,16 @@ class AutopilotViewController: UIViewController {
         let slideGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
         renderView.addGestureRecognizer(slideGesture)
         
-        videoProcessing.start()
+        let ud = NSUserDefaults.standardUserDefaults()
+        
+        
+        let storedTrackingColor = CIColor(
+            red: CGFloat(ud.doubleForKey("colorRed")),
+            green: CGFloat(ud.doubleForKey("colorGreen")),
+            blue: CGFloat(ud.doubleForKey("colorBlue")))
+        
+        setTrackingColor(storedTrackingColor)
+        setTrackingThreshold(ud.floatForKey("colorThreshold"))
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,11 +96,22 @@ class AutopilotViewController: UIViewController {
             
             videoProcessing.getColorForPoint(normalizedPoint) {
                 color in
-                print(color)
-                self.colorView.backgroundColor = UIColor(CIColor: color)
-                self.videoProcessing.setColor(color)
+                self.setTrackingColor(color)
+                NSUserDefaults.standardUserDefaults().setDouble(Double(color.red), forKey: "colorRed")
+                NSUserDefaults.standardUserDefaults().setDouble(Double(color.green), forKey: "colorGreen")
+                NSUserDefaults.standardUserDefaults().setDouble(Double(color.blue), forKey: "colorBlue")
             }
         }
+    }
+    
+    func setTrackingColor(color: CIColor) {
+        colorView.backgroundColor = UIColor(CIColor: color)
+        videoProcessing.setColor(color)
+    }
+    
+    func setTrackingThreshold(threshold: Float) {
+        videoProcessing.setThreshold(threshold)
+        self.threshold.text = String(format: "%.2f", threshold)
     }
     
     
@@ -101,7 +124,8 @@ class AutopilotViewController: UIViewController {
         
         if sender.state == .Ended {
             colorThreshold = colorThreshold+change
-            videoProcessing.setThreshold(colorThreshold)
+            setTrackingThreshold(colorThreshold)
+            NSUserDefaults.standardUserDefaults().setFloat(colorThreshold, forKey: "colorThreshold")
         }
     }
     

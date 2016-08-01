@@ -19,6 +19,8 @@
 		9F0909481D2FEF670052FB58 /* VideoProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0909471D2FEF670052FB58 /* VideoProcessing.swift */; };
 		9F09094B1D2FF2B50052FB58 /* PositionColor.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909491D2FF2B50052FB58 /* PositionColor.fsh */; };
 		9F09094C1D2FF2B50052FB58 /* ThresholdShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F09094A1D2FF2B50052FB58 /* ThresholdShader.fsh */; };
+		9F3BBEE61D4F492C00F618D2 /* VideoOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BBEE51D4F492C00F618D2 /* VideoOverlay.swift */; };
+		9F3BBEE91D4F737B00F618D2 /* Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BBEE81D4F737B00F618D2 /* Optics.swift */; };
 		9F6172101D33BB7D0092ADEE /* KitePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F61720F1D33BB7C0092ADEE /* KitePosition.swift */; };
 		9FAFE9D71D40C48E00BC5024 /* IMG_0459.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 9FAFE9D61D40C48E00BC5024 /* IMG_0459.MOV */; };
 		9FAFE9DB1D40CEE700BC5024 /* KiteRemotePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAFE9DA1D40CEE700BC5024 /* KiteRemotePageViewController.swift */; };
@@ -85,6 +87,8 @@
 		9F0909471D2FEF670052FB58 /* VideoProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoProcessing.swift; sourceTree = "<group>"; };
 		9F0909491D2FF2B50052FB58 /* PositionColor.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionColor.fsh; sourceTree = "<group>"; };
 		9F09094A1D2FF2B50052FB58 /* ThresholdShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ThresholdShader.fsh; sourceTree = "<group>"; };
+		9F3BBEE51D4F492C00F618D2 /* VideoOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoOverlay.swift; sourceTree = "<group>"; };
+		9F3BBEE81D4F737B00F618D2 /* Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optics.swift; sourceTree = "<group>"; };
 		9F61720F1D33BB7C0092ADEE /* KitePosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitePosition.swift; sourceTree = "<group>"; };
 		9FAFE9D61D40C48E00BC5024 /* IMG_0459.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0459.MOV; sourceTree = "<group>"; };
 		9FAFE9DA1D40CEE700BC5024 /* KiteRemotePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KiteRemotePageViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				9F0909471D2FEF670052FB58 /* VideoProcessing.swift */,
 				9F61720F1D33BB7C0092ADEE /* KitePosition.swift */,
 				9FAFE9DE1D411D3B00BC5024 /* Network.swift */,
+				9F3BBEE51D4F492C00F618D2 /* VideoOverlay.swift */,
+				9F3BBEE81D4F737B00F618D2 /* Optics.swift */,
 			);
 			path = KiteRemote;
 			sourceTree = "<group>";
@@ -293,7 +299,9 @@
 				9FAFE9DF1D411D3B00BC5024 /* Network.swift in Sources */,
 				9FAFE9DB1D40CEE700BC5024 /* KiteRemotePageViewController.swift in Sources */,
 				9F09093F1D2FE5BE0052FB58 /* RemoteBase.swift in Sources */,
+				9F3BBEE91D4F737B00F618D2 /* Optics.swift in Sources */,
 				9F09091F1D2C08850052FB58 /* AppDelegate.swift in Sources */,
+				9F3BBEE61D4F492C00F618D2 /* VideoOverlay.swift in Sources */,
 				9FAFE9DD1D40D3F100BC5024 /* ManualViewController.swift in Sources */,
 				9F6172101D33BB7D0092ADEE /* KitePosition.swift in Sources */,
 			);

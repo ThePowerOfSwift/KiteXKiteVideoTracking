@@ -68,29 +68,44 @@ extension KiteKinematics {
                     "av": angularVelocity]
         return dict
     }
+    
+    var data: NSData {
+        var array = [Double](count: 8, repeatedValue: 0)
+        array[0] = time
+        array[1] = position.x
+        array[2] = position.y
+        array[3] = position.z
+        array[4] = velocity.x
+        array[5] = velocity.y
+        array[6] = velocity.z
+        array[7] = angularVelocity
+        
+        return NSData(bytes: array, length: 8*sizeof(Double))
+    }
 }
 
 class Kite {
-    let d: Double = 20
-    let r: Double = 20
     var positionLast: Vector3?
     var velocityLast: Vector3?
     var timeLast: Double?
-    
-    let FOV_horizontal = 61.7/180*M_PI // deg
-    //let FOV_horizontal = 61.7/180*M_PI // deg
-    let aspectRatio = 1.33
+    let alphaMax = Optics.alpha(M_PI_2)
     
     // point relative to video frame
     // assumes that center bottom is straigt downwind
-    func calculateBetaPsi(p: CGPoint) -> (Double, Double) {
-        let qx = Double(p.x-0.5)*FOV_horizontal
-        let qy = Double(p.y)/aspectRatio*FOV_horizontal
+    func calculateBetaPsi(p: CGPoint) -> (Double, Double)? {
+        let qx = Double(p.x-0.5)*Optics.shared.fieldOfViewHorizontal
+        let qy = Double(p.y)*Optics.shared.fieldOfViewVertical
         
         let alpha = sqrt(pow(qx, 2) + pow(qy, 2))
+        
+        if (alpha > alphaMax) {
+            return nil
+        }
+        
         let psi = atan2(qy, qx)
         
-        let beta = M_PI/2 + alpha - acos(sin(alpha)*d/r)
+        let beta = M_PI/2 + alpha - acos(sin(alpha)*Optics.d/Optics.r)
+        print(alpha*180/M_PI)
         
         return (beta, psi)
     }
@@ -101,9 +116,13 @@ class Kite {
     }
     
     func newPosition(p: CGPoint, time: Double) -> KiteKinematics? {
-        let (beta, psi) = calculateBetaPsi(p)
+        var kinematics: KiteKinematics? = nil
+        
+        guard let (beta, psi) = calculateBetaPsi(p) else {
+            return kinematics
+        }
+        
         let position = normalizedPosition(beta, psi: psi)
-        var kinematics: KiteKinematics!
         
         if let positionLast = positionLast, timeLast = timeLast {
             //print(velocity(lastPos, new: pos))
@@ -130,7 +149,7 @@ class Kite {
                     angle = -angle
                 }
                 
-                kinematics = KiteKinematics(time: time, position: position*r, velocity: velocity*r, angularVelocity: angle/dT)
+                kinematics = KiteKinematics(time: time, position: position*Optics.r, velocity: velocity*Optics.r, angularVelocity: angle/dT)
             }
             velocityLast = velocity
         }
