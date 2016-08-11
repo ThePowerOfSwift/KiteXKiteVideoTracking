@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ControlView" customModule="KiteRemote" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="RVC-pa-Vyx" id="q8o-cO-hyf"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Zq5-Pr-AAZ"/>
+                <outlet property="segmentState" destination="BfV-qN-zB9" id="4aI-Ej-vFN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="237" height="102"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPX-g1-i0k">
+                    <rect key="frame" x="84" y="72" width="69" height="30"/>
+                    <state key="normal" title="Next View"/>
+                    <connections>
+                        <action selector="nextView:" destination="-1" eventType="touchUpInside" id="gWv-wI-eL7"/>
+                    </connections>
+                </button>
+                <segmentedControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-qN-zB9">
+                    <rect key="frame" x="20" y="5" width="197" height="29"/>
+                    <segments>
+                        <segment title="Connected"/>
+                        <segment title="Disconnected"/>
+                    </segments>
+                </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLM-Wh-sLj">
+                    <rect key="frame" x="139" y="40" width="78" height="30"/>
+                    <state key="normal" title="Disconnect"/>
+                    <connections>
+                        <action selector="disconnect:" destination="-1" eventType="touchUpInside" id="MnD-Sf-Hjf"/>
+                    </connections>
+                </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RVC-pa-Vyx">
+                    <rect key="frame" x="108" y="45" width="20" height="20"/>
+                </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTj-Y8-DmC">
+                    <rect key="frame" x="20" y="40" width="59" height="30"/>
+                    <state key="normal" title="Connect"/>
+                    <connections>
+                        <action selector="connect:" destination="-1" eventType="touchUpInside" id="ygX-oC-8eS"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="eLM-Wh-sLj" firstAttribute="top" secondItem="BfV-qN-zB9" secondAttribute="bottom" constant="7" id="3s8-Hg-dgL"/>
+                <constraint firstItem="RTj-Y8-DmC" firstAttribute="top" secondItem="BfV-qN-zB9" secondAttribute="bottom" constant="7" id="5Rv-XZ-GYI"/>
+                <constraint firstItem="BfV-qN-zB9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CEW-nk-EZr"/>
+                <constraint firstItem="wPX-g1-i0k" firstAttribute="top" secondItem="RVC-pa-Vyx" secondAttribute="bottom" constant="7" id="GWJ-L5-stW"/>
+                <constraint firstItem="wPX-g1-i0k" firstAttribute="centerX" secondItem="RVC-pa-Vyx" secondAttribute="centerX" id="Jkl-iC-CRV"/>
+                <constraint firstItem="RVC-pa-Vyx" firstAttribute="leading" secondItem="RTj-Y8-DmC" secondAttribute="trailing" constant="29" id="MOn-CV-Hxd"/>
+                <constraint firstItem="RTj-Y8-DmC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Mqp-1Y-ql0"/>
+                <constraint firstItem="eLM-Wh-sLj" firstAttribute="trailing" secondItem="BfV-qN-zB9" secondAttribute="trailing" id="ZNQ-rI-yHo"/>
+                <constraint firstItem="wPX-g1-i0k" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottomMargin" id="eFc-dM-nke"/>
+                <constraint firstItem="RTj-Y8-DmC" firstAttribute="centerY" secondItem="RVC-pa-Vyx" secondAttribute="centerY" id="vu9-py-f0B"/>
+                <constraint firstItem="RTj-Y8-DmC" firstAttribute="leading" secondItem="BfV-qN-zB9" secondAttribute="leading" id="yGI-4E-a23"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="eFc-dM-nke"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="514.5" y="224"/>
+        </view>
+    </objects>
+</document>

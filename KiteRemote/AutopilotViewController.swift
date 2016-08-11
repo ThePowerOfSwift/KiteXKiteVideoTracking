@@ -14,38 +14,43 @@ import AVFoundation
 class AutopilotViewController: UIViewController {
     
     let network = Network()
-    let remote = RemoteBase()
+    let baseLink = BaseLink(type: .Camera)
     let kite = Kite()
     var videoProcessing: VideoProcessing!
 
-    var colorThreshold: Float = 0.5
+    var colorThreshold = NSUserDefaults.standardUserDefaults().floatForKey("colorThreshold")
 
     @IBOutlet weak var colorView: UIView!
     
+    @IBOutlet weak var controlView: ControlView!
     @IBOutlet weak var renderView: RenderView!
     @IBOutlet weak var velocity: UILabel!
     @IBOutlet weak var angular: UILabel!
     @IBOutlet weak var threshold: UILabel!
 
-    var kiteKinematicss = [KiteKinematics]()
+//    var kiteKinematicss = [KiteKinematics]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //remote.connect()
+        controlView.baseLink = baseLink
+        controlView.next = {
+            if let pagevc = self.parentViewController as? KiteRemotePageViewController {
+                pagevc.next(self)
+            }
+        }
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         videoProcessing = VideoProcessing(renderView: renderView, video: false)
         videoProcessing.newPosition = { (position, time) in
             if let kiteKinematics = self.kite.newPosition(position, time: time) {
-                self.kiteKinematicss.append(kiteKinematics)
+//                self.kiteKinematicss.append(kiteKinematics)
                 self.velocity.text = String(format: "%.1f m/s", kiteKinematics.velocity.length)
                 self.angular.text = String(format: "%.1f r/s", kiteKinematics.angularVelocity)
                 
-                self.remote.sendData(kiteKinematics.data)
+                self.baseLink.sendData(kiteKinematics.data)
             }
-            
-            //self.remote.newPos( Int( (position.x - 0.5) * 1600*0.5 ) )
         }
         
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -55,25 +60,18 @@ class AutopilotViewController: UIViewController {
         
         let ud = NSUserDefaults.standardUserDefaults()
         
-        
         let storedTrackingColor = CIColor(
             red: CGFloat(ud.doubleForKey("colorRed")),
             green: CGFloat(ud.doubleForKey("colorGreen")),
             blue: CGFloat(ud.doubleForKey("colorBlue")))
         
         setTrackingColor(storedTrackingColor)
-        setTrackingThreshold(ud.floatForKey("colorThreshold"))
+        setTrackingThreshold(colorThreshold)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func next(sender: UIButton) {
-        if let pagevc = self.parentViewController as? KiteRemotePageViewController {
-            pagevc.next(self)
-        }
     }
 
     @IBAction func switchStateChanged(sender: UISwitch) {
@@ -82,8 +80,8 @@ class AutopilotViewController: UIViewController {
         } else {
             videoProcessing.stop()
             
-            network.sendData( kiteKinematicss.map { $0.json } )
-            kiteKinematicss.removeAll()
+//            network.sendData( kiteKinematicss.map { $0.json } )
+//            kiteKinematicss.removeAll()
         }
     }
     
@@ -114,12 +112,11 @@ class AutopilotViewController: UIViewController {
         self.threshold.text = String(format: "%.2f", threshold)
     }
     
-    
     func handlePan(sender: UIPanGestureRecognizer) {
         let change = Float(sender.translationInView(renderView).x/100)
         
         if sender.state == .Changed {
-            videoProcessing.setThreshold(colorThreshold+change)
+            setTrackingThreshold(colorThreshold+change)
         }
         
         if sender.state == .Ended {
@@ -128,7 +125,5 @@ class AutopilotViewController: UIViewController {
             NSUserDefaults.standardUserDefaults().setFloat(colorThreshold, forKey: "colorThreshold")
         }
     }
-    
-    
 }
 

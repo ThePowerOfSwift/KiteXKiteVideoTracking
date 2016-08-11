@@ -23,12 +23,10 @@ class Optics {
 //         a = 4/3 * b
 //         c*c = 4*4/3*3 b*b + b*b
 //         c*c = (1 +  16/9) b*b
-        let c = atan(sensorDiagonal/2/focalLength)*2 // *180/M_PI // diagonal FOV
-        let b = pow(c*c / (1 + 16/9),  (1/2))
-        let a = 4/3*b
         
-        fieldOfViewVertical = b
-        fieldOfViewHorizontal = a
+        let c = atan(sensorDiagonal/(2*focalLength))*2 // *180/M_PI // diagonal FOV
+        fieldOfViewVertical = sqrt(c*c / (1 + 16/9))
+        fieldOfViewHorizontal = 4/3*fieldOfViewVertical
     }
     
     static let r: Double = 45
