@@ -8,6 +8,7 @@
 
 import Foundation
 import Starscream
+import UIKit
 
 
 enum BaseLinkType: String {
@@ -19,15 +20,16 @@ class BaseLink { // FIXME: added reconnect behavior
     
     let socket = WebSocket(url: NSURL(string: "ws://192.168.2.1:8080/")!)
     var stateChangeIsConnected: (Bool -> Void)?
+    var trackingState: (Bool -> Void)?
     
     private let minDelay = 0.02 // second
     private var lastTime = NSDate()
-    //private var onData: (Int16 -> Void)?
+    var batteryTimer: NSTimer!
     
     init(type: BaseLinkType) {
         
         socket.onConnect = {
-            self.socket.writeString("id.\(type.rawValue)")
+            self.socket.writeString("id,\(type.rawValue)")
             if let didConnect = self.stateChangeIsConnected {
                 didConnect(true)
             }
@@ -47,7 +49,29 @@ class BaseLink { // FIXME: added reconnect behavior
         
         
         socket.onText = { (text: String) in
-            print("got some text: \(text)")
+            
+            
+            let a = text.componentsSeparatedByString(",")
+            let command = a[0]
+            let value = a[1]
+            
+            switch command {
+            case "camera":
+                if let callback = self.trackingState {
+                    switch value {
+                    case "on":
+                        callback(true)
+                        break
+                    case "off":
+                        callback(false)
+                        break
+                    default: break
+                    }
+                }
+            default:
+                print("got some text: \(text)")
+            }
+            
         }
         
         socket.onData = { (data: NSData) in
@@ -64,5 +88,14 @@ class BaseLink { // FIXME: added reconnect behavior
         if lastTime.timeIntervalSinceNow <= -minDelay && socket.isConnected {
             socket.writeData(data)
         }
+    }
+    
+    func startTimer() {
+        batteryTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(BaseLink.updatebatteryInfo), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updatebatteryInfo() {
+        UIDevice.currentDevice().batteryMonitoringEnabled = true
+        socket.writeString("phoneBat," + String(UIDevice.currentDevice().batteryLevel))
     }
 }

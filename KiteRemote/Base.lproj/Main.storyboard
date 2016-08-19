@@ -137,6 +137,7 @@
                         <outlet property="colorView" destination="siQ-6I-ijd" id="XeS-s0-He8"/>
                         <outlet property="controlView" destination="Mkz-O6-zSy" id="W2b-Ro-Hak"/>
                         <outlet property="renderView" destination="awK-Gf-0cX" id="rSe-JJ-LCD"/>
+                        <outlet property="stateSwitch" destination="CYl-in-1wu" id="VLY-r7-d44"/>
                         <outlet property="threshold" destination="pQA-bw-h30" id="a3Q-LN-OKh"/>
                         <outlet property="velocity" destination="aFa-ww-wCw" id="r7c-4D-emZ"/>
                     </connections>

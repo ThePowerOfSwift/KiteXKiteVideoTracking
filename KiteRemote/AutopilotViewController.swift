@@ -27,8 +27,9 @@ class AutopilotViewController: UIViewController {
     @IBOutlet weak var velocity: UILabel!
     @IBOutlet weak var angular: UILabel!
     @IBOutlet weak var threshold: UILabel!
-
-//    var kiteKinematicss = [KiteKinematics]()
+    
+    @IBOutlet weak var stateSwitch: UISwitch!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +41,24 @@ class AutopilotViewController: UIViewController {
             }
         }
         
-        
         // Do any additional setup after loading the view, typically from a nib.
         videoProcessing = VideoProcessing(renderView: renderView, video: false)
         videoProcessing.newPosition = { (position, time) in
-            if let kiteKinematics = self.kite.newPosition(position, time: time) {
-//                self.kiteKinematicss.append(kiteKinematics)
-                self.velocity.text = String(format: "%.1f m/s", kiteKinematics.velocity.length)
-                self.angular.text = String(format: "%.1f r/s", kiteKinematics.angularVelocity)
-                
-                self.baseLink.sendData(kiteKinematics.data)
-            }
+            
+            var array = [Double](count: 3, repeatedValue: 0)
+            array[0] = time
+            array[1] = Double(position.x)
+            array[2] = Double(position.y)
+            
+            self.baseLink.sendData(NSData(bytes: array, length: 3*sizeof(Double)))
+            
+//            if let kiteKinematics = self.kite.newPosition(position, time: time) {
+////                self.kiteKinematicss.append(kiteKinematics)
+//                self.velocity.text = String(format: "%.1f m/s", kiteKinematics.velocity.length)
+//                self.angular.text = String(format: "%.1f r/s", kiteKinematics.angularVelocity)
+//                
+//                self.baseLink.sendData(kiteKinematics.data)
+//            }
         }
         
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -67,23 +75,32 @@ class AutopilotViewController: UIViewController {
         
         setTrackingColor(storedTrackingColor)
         setTrackingThreshold(colorThreshold)
+        
+        baseLink.trackingState = { (state: Bool) in
+            self.stateSwitch.on = state
+            if state {
+                self.videoProcessing.start()
+            } else {
+                self.videoProcessing.stop()
+            }
+        }
+        baseLink.startTimer()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func switchStateChanged(sender: UISwitch) {
         if sender.on {
             videoProcessing.start()
         } else {
             videoProcessing.stop()
-            
-//            network.sendData( kiteKinematicss.map { $0.json } )
-//            kiteKinematicss.removeAll()
         }
     }
+    
+    
     
     func handleTap(sender: UITapGestureRecognizer) {
         
