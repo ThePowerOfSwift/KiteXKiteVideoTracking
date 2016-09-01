@@ -15,7 +15,6 @@ class AutopilotViewController: UIViewController {
     
     let network = Network()
     let baseLink = BaseLink(type: .Camera)
-    let kite = Kite()
     var videoProcessing: VideoProcessing!
 
     var colorThreshold = NSUserDefaults.standardUserDefaults().floatForKey("colorThreshold")
@@ -52,13 +51,6 @@ class AutopilotViewController: UIViewController {
             
             self.baseLink.sendData(NSData(bytes: array, length: 3*sizeof(Double)))
             
-//            if let kiteKinematics = self.kite.newPosition(position, time: time) {
-////                self.kiteKinematicss.append(kiteKinematics)
-//                self.velocity.text = String(format: "%.1f m/s", kiteKinematics.velocity.length)
-//                self.angular.text = String(format: "%.1f r/s", kiteKinematics.angularVelocity)
-//                
-//                self.baseLink.sendData(kiteKinematics.data)
-//            }
         }
         
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))

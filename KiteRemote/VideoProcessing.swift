@@ -20,6 +20,73 @@ extension Size {
 }
 
 
+public class DifferenceFilter: BasicOperation {
+    public var threshold:Float = 0.0 { didSet { uniformSettings["threshold"] = threshold } }
+    
+    public init?() {
+        let pathPosition = NSBundle.mainBundle().pathForResource("DifferenceThreshold", ofType: "fsh")!
+        let url = NSURL(fileURLWithPath: pathPosition)
+        
+        do {
+            let fragmentShader = try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding) as String
+            super.init(fragmentShader:fragmentShader, numberOfInputs:2)
+        }
+        catch {
+            return nil
+        }
+        
+        ({threshold = 0.1})()
+    }
+}
+
+public class HighPassTrueColorFilter: OperationGroup {
+    public var lowPassStrength: Float = 0.5 { didSet { lowPass.strength = lowPassStrength } }
+    public var threshold: Float = 0.5 { didSet { differenceFilter.threshold = threshold } }
+    
+    let lowPass = LowPassFilter()
+    let differenceFilter = DifferenceFilter()! // fail hard
+    
+    public override init() {
+        super.init()
+        
+        ({lowPassStrength = 0.8
+        threshold = 0.1})()
+        
+        self.configureGroup{input, output in
+            input --> self.differenceFilter
+            input --> self.lowPass --> self.differenceFilter --> output
+        }
+    }
+}
+
+public class KiteColorFilter: BasicOperation {
+    public var red:Float = 0.0 { didSet { uniformSettings["red"] = red } }
+    public var redGreen:Float = 0.0 { didSet { uniformSettings["redGreen"] = redGreen } }
+    public var redBlue:Float = 0.0 { didSet { uniformSettings["redBlue"] = redBlue } }
+
+    
+    public init?() {
+        let pathPosition = NSBundle.mainBundle().pathForResource("ColorTresholdShader", ofType: "fsh")!
+        let url = NSURL(fileURLWithPath: pathPosition)
+        
+        do {
+            let fragmentShader = try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding) as String
+            super.init(fragmentShader:fragmentShader, numberOfInputs:1)
+        }
+        catch {
+            return nil
+        }
+        
+        ({
+            red = 0.5
+            redGreen = 0.7
+            redBlue = 4.0
+        })()
+    }
+}
+
+
+
 class VideoProcessing {
     
     private let camera: Camera?
@@ -35,7 +102,15 @@ class VideoProcessing {
     private let pathColor = NSBundle.mainBundle().pathForResource("ThresholdShader", ofType: "fsh")!
     private let positionFilter: BasicOperation!
     private let colorFilter: BasicOperation!
-
+    private let motionDetector = MotionDetector()
+    private let highPassFilter = HighPassFilter()
+    private let darkenBlend = DarkenBlend()
+    private let circleGenerator: CircleGenerator!
+    private let highPassTrueColorFilter = HighPassTrueColorFilter()
+    private let kiteColorFilter = KiteColorFilter()!
+    
+    
+    
     private let rawOut = RawDataOutput()
     private let positionOut = RawDataOutput()
 
@@ -48,15 +123,24 @@ class VideoProcessing {
 
         self.renderView = renderView
         renderView.orientation = .LandscapeRight
+        
+        circleGenerator = CircleGenerator(size: size.transpose)
+//        circleGenerator.renderCircleOfRadius(0.1, center: Position(0.5,0.5))
+        circleGenerator.renderCircleOfRadius(0.1,
+                                             center: Position(0.5,0.5),
+                                             circleColor: Color(red: 1, green: 1, blue: 1, alpha: 1),
+                                             backgroundColor: Color(red: 0, green: 0, blue: 0, alpha: 1))
 
+        
         crosshairGenerator = CrosshairGenerator(size: size.transpose)
         crosshairGenerator.crosshairWidth = 15
-
+        
         do {
             positionFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathPosition))
             colorFilter = try BasicOperation(fragmentShaderFile: NSURL(fileURLWithPath: pathColor))
+            
             if video {
-                movieInput = try MovieInput(url: NSURL(fileURLWithPath: moviePosition), playAtActualSpeed: false, loop: true)
+                movieInput = try MovieInput(url: NSURL(fileURLWithPath: moviePosition), playAtActualSpeed: true, loop: true)
                 camera = nil
                 renderView.orientation = .Portrait
             }
@@ -71,6 +155,13 @@ class VideoProcessing {
             fatalError("Could not initialize rendering pipeline: \(error)")
         }
         
+        
+        motionDetector.motionDetectedCallback = {
+            (pos: Position, strength: Float) in
+            self.crosshairGenerator.renderCrosshairs([pos])
+            print(pos)
+            
+        }
         
         positionOut.dataAvailableCallback = {
             (imageBuffer: [UInt8]) in
@@ -110,8 +201,11 @@ class VideoProcessing {
         
         if let camera = camera {
             camera --> rawOut
-            camera --> colorFilter
-            camera --> positionFilter --> positionOut
+//            camera --> colorFilter
+//            camera --> positionFilter --> positionOut
+//            camera --> highPassFilter --> blend
+            camera --> highPassTrueColorFilter --> kiteColorFilter --> renderView
+
         }
 
         if let movieInput = movieInput {
@@ -120,8 +214,9 @@ class VideoProcessing {
             movieInput --> positionFilter --> positionOut
         }
         
-        colorFilter --> blend
-        crosshairGenerator --> blend --> renderView
+//        colorFilter --> blend
+//        crosshairGenerator --> blend --> renderView
+//        circleGenerator --> darkenBlend --> renderView
         
     }
     
@@ -185,6 +280,9 @@ class VideoProcessing {
     }
     
     func setThreshold(threshold: Float) {
+        highPassTrueColorFilter.threshold = threshold
+        highPassFilter.strength = threshold
+        motionDetector.lowPassStrength = threshold
         positionFilter.uniformSettings["threshold"] = threshold
         colorFilter.uniformSettings["threshold"] = threshold
     }
