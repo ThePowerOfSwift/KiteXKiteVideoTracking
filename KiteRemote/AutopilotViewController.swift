@@ -77,6 +77,11 @@ class AutopilotViewController: UIViewController {
             }
         }
         baseLink.startTimer()
+        
+        
+        baseLink.captureImage = {
+            self.videoProcessing.saveImage()
+        }
     }
 
     override func didReceiveMemoryWarning() {

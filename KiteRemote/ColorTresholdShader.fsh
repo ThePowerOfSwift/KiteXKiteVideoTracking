@@ -18,7 +18,7 @@ void main()
     redBlueRatio = pixelColor.r / pixelColor.b;
     
     if (pixelColor.r > red && redGreenRatio > redGreen && redBlueRatio > redBlue) {
-        gl_FragColor = vec4(pixelColor.r, 0, pixelColor.b, 1); //pixelColor;
+        gl_FragColor = vec4(textureCoordinate, 0, 1); //pixelColor;
     } else {
         gl_FragColor = vec4(0.0);
     }

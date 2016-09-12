@@ -21,6 +21,7 @@ class BaseLink { // FIXME: added reconnect behavior
     let socket = WebSocket(url: NSURL(string: "ws://192.168.2.1:8080/")!)
     var stateChangeIsConnected: (Bool -> Void)?
     var trackingState: (Bool -> Void)?
+    var captureImage: (Void -> Void)?
     
     private let minDelay = 0.02 // second
     private var lastTime = NSDate()
@@ -68,6 +69,13 @@ class BaseLink { // FIXME: added reconnect behavior
                     default: break
                     }
                 }
+                
+                if let callback = self.captureImage {
+                    if (value == "capture") {
+                        callback()
+                    }
+                }
+                
             default:
                 print("got some text: \(text)")
             }
