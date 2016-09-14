@@ -39,5 +39,7 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>We need the camera to be able to track the kite. Thanks!</string>
 </dict>
 </plist>
