@@ -13,11 +13,10 @@ import AVFoundation
 
 class AutopilotViewController: UIViewController {
     
-    let network = Network()
     let baseLink = BaseLink(type: .Camera)
     var videoProcessing: VideoProcessing!
 
-    var colorThreshold = NSUserDefaults.standardUserDefaults().floatForKey("colorThreshold")
+    var colorThreshold = UserDefaults.standard.float(forKey: "colorThreshold")
 
     @IBOutlet weak var colorView: UIView!
     
@@ -34,8 +33,8 @@ class AutopilotViewController: UIViewController {
         super.viewDidLoad()
         
         controlView.baseLink = baseLink
-        controlView.next = {
-            if let pagevc = self.parentViewController as? KiteRemotePageViewController {
+        controlView.nextVC = {
+            if let pagevc = self.parent as? KiteRemotePageViewController {
                 pagevc.next(self)
             }
         }
@@ -44,32 +43,21 @@ class AutopilotViewController: UIViewController {
         videoProcessing = VideoProcessing(renderView: renderView, video: false)
         videoProcessing.newPosition = { (position, time) in
             
-            var array = [Double](count: 3, repeatedValue: 0)
+            var array = [Double](repeating: 0, count: 3)
             array[0] = time
             array[1] = Double(position.x)
-            array[2] = Double(position.y)
+            array[2] = (1 - Double(position.y)) * 3/4
             
-            self.baseLink.sendData(NSData(bytes: array, length: 3*sizeof(Double)))
+            self.baseLink.sendData(Data(bytes: UnsafeRawPointer(array), count: 3 * MemoryLayout<Double>.size))
             
         }
         
-        let tabGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        renderView.addGestureRecognizer(tabGesture)
-        let slideGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
-        renderView.addGestureRecognizer(slideGesture)
-        
-        let ud = NSUserDefaults.standardUserDefaults()
-        
-        let storedTrackingColor = CIColor(
-            red: CGFloat(ud.doubleForKey("colorRed")),
-            green: CGFloat(ud.doubleForKey("colorGreen")),
-            blue: CGFloat(ud.doubleForKey("colorBlue")))
-        
-        setTrackingColor(storedTrackingColor)
-        setTrackingThreshold(colorThreshold)
+        videoProcessing.pictureOutBlock = { data in
+            self.baseLink.sendData(data)
+        }
         
         baseLink.trackingState = { (state: Bool) in
-            self.stateSwitch.on = state
+            self.stateSwitch.isOn = state
             if state {
                 self.videoProcessing.start()
             } else {
@@ -89,54 +77,11 @@ class AutopilotViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func switchStateChanged(sender: UISwitch) {
-        if sender.on {
+    @IBAction func switchStateChanged(_ sender: UISwitch) {
+        if sender.isOn {
             videoProcessing.start()
         } else {
             videoProcessing.stop()
-        }
-    }
-    
-    
-    
-    func handleTap(sender: UITapGestureRecognizer) {
-        
-        if sender.state == .Ended {
-            let touchPoint = sender.locationOfTouch(0, inView: renderView)
-            
-            let normalizedPoint = CGPoint(x: touchPoint.x / renderView.frame.size.width, y: touchPoint.y / renderView.frame.size.height)
-            
-            videoProcessing.getColorForPoint(normalizedPoint) {
-                color in
-                self.setTrackingColor(color)
-                NSUserDefaults.standardUserDefaults().setDouble(Double(color.red), forKey: "colorRed")
-                NSUserDefaults.standardUserDefaults().setDouble(Double(color.green), forKey: "colorGreen")
-                NSUserDefaults.standardUserDefaults().setDouble(Double(color.blue), forKey: "colorBlue")
-            }
-        }
-    }
-    
-    func setTrackingColor(color: CIColor) {
-        colorView.backgroundColor = UIColor(CIColor: color)
-        videoProcessing.setColor(color)
-    }
-    
-    func setTrackingThreshold(threshold: Float) {
-        videoProcessing.setThreshold(threshold)
-        self.threshold.text = String(format: "%.2f", threshold)
-    }
-    
-    func handlePan(sender: UIPanGestureRecognizer) {
-        let change = Float(sender.translationInView(renderView).x/100)
-        
-        if sender.state == .Changed {
-            setTrackingThreshold(colorThreshold+change)
-        }
-        
-        if sender.state == .Ended {
-            colorThreshold = colorThreshold+change
-            setTrackingThreshold(colorThreshold)
-            NSUserDefaults.standardUserDefaults().setFloat(colorThreshold, forKey: "colorThreshold")
         }
     }
 }

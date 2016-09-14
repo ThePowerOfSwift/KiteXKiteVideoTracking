@@ -12,10 +12,7 @@
 		9F0909241D2C08850052FB58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909221D2C08850052FB58 /* Main.storyboard */; };
 		9F0909261D2C08850052FB58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909251D2C08850052FB58 /* Assets.xcassets */; };
 		9F0909291D2C08860052FB58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909271D2C08860052FB58 /* LaunchScreen.storyboard */; };
-		9F0909311D2D26FA0052FB58 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0909301D2D26F90052FB58 /* Starscream.framework */; };
 		9F09093F1D2FE5BE0052FB58 /* BaseLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F09093E1D2FE5BE0052FB58 /* BaseLink.swift */; };
-		9F0909421D2FEA5D0052FB58 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0909391D2FE4AE0052FB58 /* GPUImage.framework */; };
-		9F0909431D2FEA5D0052FB58 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0909391D2FE4AE0052FB58 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F0909481D2FEF670052FB58 /* VideoProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0909471D2FEF670052FB58 /* VideoProcessing.swift */; };
 		9F09094B1D2FF2B50052FB58 /* PositionColor.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F0909491D2FF2B50052FB58 /* PositionColor.fsh */; };
 		9F09094C1D2FF2B50052FB58 /* ThresholdShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9F09094A1D2FF2B50052FB58 /* ThresholdShader.fsh */; };
@@ -29,37 +26,90 @@
 		9FAFE9D71D40C48E00BC5024 /* IMG_0459.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 9FAFE9D61D40C48E00BC5024 /* IMG_0459.MOV */; };
 		9FAFE9DB1D40CEE700BC5024 /* KiteRemotePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAFE9DA1D40CEE700BC5024 /* KiteRemotePageViewController.swift */; };
 		9FAFE9DD1D40D3F100BC5024 /* ManualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAFE9DC1D40D3F100BC5024 /* ManualViewController.swift */; };
-		9FAFE9DF1D411D3B00BC5024 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAFE9DE1D411D3B00BC5024 /* Network.swift */; };
+		9FB63C491D89462A00902563 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB63C441D8945B000902563 /* GPUImage.framework */; };
+		9FB63C4B1D89465400902563 /* GPUImage.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 9FB63C441D8945B000902563 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9FB63C651D8954F500902563 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB63C561D894CBD00902563 /* Starscream.framework */; };
+		9FB63C661D8954F500902563 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB63C561D894CBD00902563 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9FD3CBF71D87232C00DD9FFB /* VideoAuxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3CBF61D87232C00DD9FFB /* VideoAuxiliary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9F0909381D2FE4AE0052FB58 /* PBXContainerItemProxy */ = {
+		9FB63C431D8945B000902563 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			containerPortal = 9FB63C3E1D8945B000902563 /* GPUImage-iOS.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCD1B1251C66A262001F2BDC;
 			remoteInfo = GPUImage;
 		};
-		9F09093A1D2FE4AE0052FB58 /* PBXContainerItemProxy */ = {
+		9FB63C451D8945B000902563 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			containerPortal = 9FB63C3E1D8945B000902563 /* GPUImage-iOS.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCD1B12F1C66A262001F2BDC;
 			remoteInfo = GPUImageTests;
 		};
-		9F09093C1D2FE4CD0052FB58 /* PBXContainerItemProxy */ = {
+		9FB63C471D89461C00902563 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			containerPortal = 9FB63C3E1D8945B000902563 /* GPUImage-iOS.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = BCD1B1241C66A262001F2BDC;
 			remoteInfo = GPUImage;
 		};
-		9F0909441D2FEA5D0052FB58 /* PBXContainerItemProxy */ = {
+		9FB63C551D894CBD00902563 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6B3E79E619D48B7F006071F7;
+			remoteInfo = "Starscream iOS";
+		};
+		9FB63C571D894CBD00902563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6B3E79F119D48B7F006071F7;
+			remoteInfo = "Starscream iOSTests";
+		};
+		9FB63C591D894CBD00902563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D9C3E35F19E48FF1009FC285;
+			remoteInfo = "Starscream OSX";
+		};
+		9FB63C5B1D894CBD00902563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D9C3E36919E48FF1009FC285;
+			remoteInfo = "Starscream OSXTests";
+		};
+		9FB63C5D1D894CBD00902563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 091277971BD673A70003036D;
+			remoteInfo = "Starscream tvOS";
+		};
+		9FB63C5F1D894CBD00902563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 091277A01BD673A70003036D;
+			remoteInfo = "Starscream tvOSTests";
+		};
+		9FB63C611D894D3600902563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = BCD1B1241C66A262001F2BDC;
-			remoteInfo = GPUImage;
+			remoteGlobalIDString = 6B3E79E519D48B7F006071F7;
+			remoteInfo = "Starscream iOS";
+		};
+		9FB63C671D8954F500902563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B3E79E519D48B7F006071F7;
+			remoteInfo = "Starscream iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -70,9 +120,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9F0909431D2FEA5D0052FB58 /* GPUImage.framework in Embed Frameworks */,
+				9FB63C661D8954F500902563 /* Starscream.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FB63C4A1D89464100902563 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9FB63C4B1D89465400902563 /* GPUImage.framework in Copy Files */,
+			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -85,8 +146,6 @@
 		9F0909251D2C08850052FB58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F0909281D2C08860052FB58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F09092A1D2C08860052FB58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F0909301D2D26F90052FB58 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
-		9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "GPUImage-iOS.xcodeproj"; path = "GPUImage2/framework/GPUImage-iOS.xcodeproj"; sourceTree = "<group>"; };
 		9F09093E1D2FE5BE0052FB58 /* BaseLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLink.swift; sourceTree = "<group>"; };
 		9F0909471D2FEF670052FB58 /* VideoProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoProcessing.swift; sourceTree = "<group>"; };
 		9F0909491D2FF2B50052FB58 /* PositionColor.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PositionColor.fsh; sourceTree = "<group>"; };
@@ -101,7 +160,9 @@
 		9FAFE9D61D40C48E00BC5024 /* IMG_0459.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0459.MOV; sourceTree = "<group>"; };
 		9FAFE9DA1D40CEE700BC5024 /* KiteRemotePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KiteRemotePageViewController.swift; sourceTree = "<group>"; };
 		9FAFE9DC1D40D3F100BC5024 /* ManualViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualViewController.swift; sourceTree = "<group>"; };
-		9FAFE9DE1D411D3B00BC5024 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		9FB63C3E1D8945B000902563 /* GPUImage-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "GPUImage-iOS.xcodeproj"; path = "GPUImage2/framework/GPUImage-iOS.xcodeproj"; sourceTree = "<group>"; };
+		9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Starscream.xcodeproj; path = Starscream/Starscream.xcodeproj; sourceTree = "<group>"; };
+		9FD3CBF61D87232C00DD9FFB /* VideoAuxiliary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAuxiliary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +170,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FB63C651D8954F500902563 /* Starscream.framework in Frameworks */,
+				9FB63C491D89462A00902563 /* GPUImage.framework in Frameworks */,
 				9FA7779E1D78C34F00C9E1F5 /* Accelerate.framework in Frameworks */,
-				9F0909311D2D26FA0052FB58 /* Starscream.framework in Frameworks */,
-				9F0909421D2FEA5D0052FB58 /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,9 +182,9 @@
 		9F0909121D2C08850052FB58 = {
 			isa = PBXGroup;
 			children = (
+				9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */,
+				9FB63C3E1D8945B000902563 /* GPUImage-iOS.xcodeproj */,
 				9FA7779D1D78C34E00C9E1F5 /* Accelerate.framework */,
-				9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */,
-				9F0909301D2D26F90052FB58 /* Starscream.framework */,
 				9F09091D1D2C08850052FB58 /* KiteRemote */,
 				9F09091C1D2C08850052FB58 /* Products */,
 			);
@@ -154,20 +215,11 @@
 				9F09092A1D2C08860052FB58 /* Info.plist */,
 				9F09093E1D2FE5BE0052FB58 /* BaseLink.swift */,
 				9F0909471D2FEF670052FB58 /* VideoProcessing.swift */,
-				9FAFE9DE1D411D3B00BC5024 /* Network.swift */,
 				9F3BBEE51D4F492C00F618D2 /* VideoOverlay.swift */,
 				9F3BBEE81D4F737B00F618D2 /* Optics.swift */,
+				9FD3CBF61D87232C00DD9FFB /* VideoAuxiliary.swift */,
 			);
 			path = KiteRemote;
-			sourceTree = "<group>";
-		};
-		9F0909341D2FE4AD0052FB58 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9F0909391D2FE4AE0052FB58 /* GPUImage.framework */,
-				9F09093B1D2FE4AE0052FB58 /* GPUImageTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		9F09094D1D2FF2BC0052FB58 /* Shaders */ = {
@@ -189,6 +241,28 @@
 			name = Movies;
 			sourceTree = "<group>";
 		};
+		9FB63C3F1D8945B000902563 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9FB63C441D8945B000902563 /* GPUImage.framework */,
+				9FB63C461D8945B000902563 /* GPUImageTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9FB63C4D1D894CBD00902563 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9FB63C561D894CBD00902563 /* Starscream.framework */,
+				9FB63C581D894CBD00902563 /* Starscream iOSTests.xctest */,
+				9FB63C5A1D894CBD00902563 /* Starscream.framework */,
+				9FB63C5C1D894CBD00902563 /* Starscream OSXTests.xctest */,
+				9FB63C5E1D894CBD00902563 /* Starscream.framework */,
+				9FB63C601D894CBD00902563 /* Starscream tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -201,12 +275,14 @@
 				9F0909191D2C08850052FB58 /* Resources */,
 				9F0909321D2D271F0052FB58 /* ShellScript */,
 				9F0909461D2FEA5D0052FB58 /* Embed Frameworks */,
+				9FB63C4A1D89464100902563 /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9F09093D1D2FE4CD0052FB58 /* PBXTargetDependency */,
-				9F0909451D2FEA5D0052FB58 /* PBXTargetDependency */,
+				9FB63C621D894D3600902563 /* PBXTargetDependency */,
+				9FB63C481D89461C00902563 /* PBXTargetDependency */,
+				9FB63C681D8954F500902563 /* PBXTargetDependency */,
 			);
 			name = KiteRemote;
 			productName = KiteRemote;
@@ -220,11 +296,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Andreas Okholm";
 				TargetAttributes = {
 					9F09091A1D2C08850052FB58 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6SFA569UUR;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -241,8 +319,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 9F0909341D2FE4AD0052FB58 /* Products */;
-					ProjectRef = 9F0909331D2FE4AD0052FB58 /* GPUImage-iOS.xcodeproj */;
+					ProductGroup = 9FB63C3F1D8945B000902563 /* Products */;
+					ProjectRef = 9FB63C3E1D8945B000902563 /* GPUImage-iOS.xcodeproj */;
+				},
+				{
+					ProductGroup = 9FB63C4D1D894CBD00902563 /* Products */;
+					ProjectRef = 9FB63C4C1D894CBD00902563 /* Starscream.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -253,18 +335,60 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9F0909391D2FE4AE0052FB58 /* GPUImage.framework */ = {
+		9FB63C441D8945B000902563 /* GPUImage.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = GPUImage.framework;
-			remoteRef = 9F0909381D2FE4AE0052FB58 /* PBXContainerItemProxy */;
+			remoteRef = 9FB63C431D8945B000902563 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9F09093B1D2FE4AE0052FB58 /* GPUImageTests.xctest */ = {
+		9FB63C461D8945B000902563 /* GPUImageTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = GPUImageTests.xctest;
-			remoteRef = 9F09093A1D2FE4AE0052FB58 /* PBXContainerItemProxy */;
+			remoteRef = 9FB63C451D8945B000902563 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9FB63C561D894CBD00902563 /* Starscream.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Starscream.framework;
+			remoteRef = 9FB63C551D894CBD00902563 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9FB63C581D894CBD00902563 /* Starscream iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starscream iOSTests.xctest";
+			remoteRef = 9FB63C571D894CBD00902563 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9FB63C5A1D894CBD00902563 /* Starscream.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Starscream.framework;
+			remoteRef = 9FB63C591D894CBD00902563 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9FB63C5C1D894CBD00902563 /* Starscream OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starscream OSXTests.xctest";
+			remoteRef = 9FB63C5B1D894CBD00902563 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9FB63C5E1D894CBD00902563 /* Starscream.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Starscream.framework;
+			remoteRef = 9FB63C5D1D894CBD00902563 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9FB63C601D894CBD00902563 /* Starscream tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starscream tvOSTests.xctest";
+			remoteRef = 9FB63C5F1D894CBD00902563 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -312,11 +436,11 @@
 			files = (
 				9F0909481D2FEF670052FB58 /* VideoProcessing.swift in Sources */,
 				9F0909211D2C08850052FB58 /* AutopilotViewController.swift in Sources */,
-				9FAFE9DF1D411D3B00BC5024 /* Network.swift in Sources */,
 				9FAFE9DB1D40CEE700BC5024 /* KiteRemotePageViewController.swift in Sources */,
 				9F09093F1D2FE5BE0052FB58 /* BaseLink.swift in Sources */,
 				9F3BBEE91D4F737B00F618D2 /* Optics.swift in Sources */,
 				9F7AAB071D50CD8A0027EF3E /* ControlView.swift in Sources */,
+				9FD3CBF71D87232C00DD9FFB /* VideoAuxiliary.swift in Sources */,
 				9F09091F1D2C08850052FB58 /* AppDelegate.swift in Sources */,
 				9F3BBEE61D4F492C00F618D2 /* VideoOverlay.swift in Sources */,
 				9FAFE9DD1D40D3F100BC5024 /* ManualViewController.swift in Sources */,
@@ -326,15 +450,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9F09093D1D2FE4CD0052FB58 /* PBXTargetDependency */ = {
+		9FB63C481D89461C00902563 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GPUImage;
-			targetProxy = 9F09093C1D2FE4CD0052FB58 /* PBXContainerItemProxy */;
+			targetProxy = 9FB63C471D89461C00902563 /* PBXContainerItemProxy */;
 		};
-		9F0909451D2FEA5D0052FB58 /* PBXTargetDependency */ = {
+		9FB63C621D894D3600902563 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = GPUImage;
-			targetProxy = 9F0909441D2FEA5D0052FB58 /* PBXContainerItemProxy */;
+			name = "Starscream iOS";
+			targetProxy = 9FB63C611D894D3600902563 /* PBXContainerItemProxy */;
+		};
+		9FB63C681D8954F500902563 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Starscream iOS";
+			targetProxy = 9FB63C671D8954F500902563 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -372,8 +501,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -417,8 +548,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -437,6 +570,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -444,8 +578,9 @@
 		9F09092E1D2C08860052FB58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = 6SFA569UUR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -454,14 +589,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dk.aokholm.KiteRemote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		9F09092F1D2C08860052FB58 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = 6SFA569UUR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -470,6 +607,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dk.aokholm.KiteRemote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

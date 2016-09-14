@@ -27,27 +27,27 @@ class ControlView: UIView {
             }
         }
     }
-    var next: (Void -> Void)?
+    var nextVC: ((Void) -> Void)?
 
     @IBOutlet weak var contentView: UIView?
     @IBOutlet weak var segmentState: UISegmentedControl!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    @IBAction func connect(sender: UIButton) {
+    @IBAction func connect(_ sender: UIButton) {
         baseLink?.socket.connect()
         activityIndicator.startAnimating()
         
     }
 
-    @IBAction func disconnect(sender: UIButton) {
+    @IBAction func disconnect(_ sender: UIButton) {
         baseLink?.socket.disconnect()
         activityIndicator.startAnimating()
     }
     
     
-    @IBAction func nextView(sender: UIButton) {
-        next?()
+    @IBAction func nextView(_ sender: UIButton) {
+        nextVC?()
     }
     
     override init(frame: CGRect) { // for using CustomView in code
@@ -60,11 +60,11 @@ class ControlView: UIView {
         self.commonInit()
     }
     
-    private func commonInit() {
-        NSBundle.mainBundle().loadNibNamed("ControlView", owner: self, options: nil)
+    fileprivate func commonInit() {
+        Bundle.main.loadNibNamed("ControlView", owner: self, options: nil)
         guard let content = contentView else { return }
         content.frame = self.bounds
-        content.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(content)
     }
     

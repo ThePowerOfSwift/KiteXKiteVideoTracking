@@ -16,7 +16,7 @@ class VideoOverlay:UIView
 //    let r: Double = 45 // m
 //    let d: Double = 45 // m
     
-    @IBInspectable var ringColor: UIColor = UIColor.orangeColor()
+    @IBInspectable var ringColor: UIColor = UIColor.orange
         {
         didSet {} //print("bColor was set here") }
     }
@@ -27,11 +27,11 @@ class VideoOverlay:UIView
     
     @IBInspectable var isSelected: Bool = true
     
-    override func drawRect(rect: CGRect)
+    override func draw(_ rect: CGRect)
     {
         self.clipsToBounds = true
         
-        let betas = Double(0).stride(through: M_PI_2, by: M_PI_2/9)
+        let betas = stride(from: Double(0), through: M_PI_2, by: M_PI_2/9)
         
         betas.forEach { beta in
             let a = Optics.alpha(beta)
@@ -48,10 +48,10 @@ class VideoOverlay:UIView
                 clockwise: true)
             
             let shapeLayer = CAShapeLayer()
-            shapeLayer.path = circlePath.CGPath
+            shapeLayer.path = circlePath.cgPath
             
-            shapeLayer.fillColor = UIColor.clearColor().CGColor
-            shapeLayer.strokeColor = UIColor.redColor().CGColor
+            shapeLayer.fillColor = UIColor.clear.cgColor
+            shapeLayer.strokeColor = UIColor.red.cgColor
             shapeLayer.lineWidth = ringThickness
             
             layer.addSublayer(shapeLayer)

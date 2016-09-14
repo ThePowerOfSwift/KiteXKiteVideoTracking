@@ -18,19 +18,17 @@ enum BaseLinkType: String {
 
 class BaseLink { // FIXME: added reconnect behavior
     
-    let socket = WebSocket(url: NSURL(string: "ws://192.168.2.1:8080/")!)
-    var stateChangeIsConnected: (Bool -> Void)?
-    var trackingState: (Bool -> Void)?
-    var captureImage: (Void -> Void)?
+    let socket = WebSocket(url: URL(string: "ws://192.168.2.1:8080/")!)
+    var stateChangeIsConnected: ((Bool) -> Void)?
+    var trackingState: ((Bool) -> Void)?
+    var captureImage: ((Void) -> Void)?
     
-    private let minDelay = 0.02 // second
-    private var lastTime = NSDate()
-    var batteryTimer: NSTimer!
+    var batteryTimer: Timer!
     
     init(type: BaseLinkType) {
         
         socket.onConnect = {
-            self.socket.writeString("id,\(type.rawValue)")
+            self.socket.write(string: "id,\(type.rawValue)")
             if let didConnect = self.stateChangeIsConnected {
                 didConnect(true)
             }
@@ -52,7 +50,7 @@ class BaseLink { // FIXME: added reconnect behavior
         socket.onText = { (text: String) in
             
             
-            let a = text.componentsSeparatedByString(",")
+            let a = text.components(separatedBy: ",")
             let command = a[0]
             let value = a[1]
             
@@ -82,28 +80,23 @@ class BaseLink { // FIXME: added reconnect behavior
             
         }
         
-        socket.onData = { (data: NSData) in
+        socket.onData = { (data: Data) in
             // not in use
-//            if let onData = self.onData {
-//                var numbers = [Int16](count: 1, repeatedValue: 0)
-//                data.getBytes(&numbers, length: 2)
-//                onData(numbers[0])
-//            }
         }
     }
     
-    func sendData(data: NSData) {
-        if lastTime.timeIntervalSinceNow <= -minDelay && socket.isConnected {
-            socket.writeData(data)
+    func sendData(_ data: Data) {
+        if socket.isConnected {
+            socket.write(data)
         }
     }
     
     func startTimer() {
-        batteryTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(BaseLink.updatebatteryInfo), userInfo: nil, repeats: true)
+        batteryTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(BaseLink.updatebatteryInfo), userInfo: nil, repeats: true)
     }
     
     @objc func updatebatteryInfo() {
-        UIDevice.currentDevice().batteryMonitoringEnabled = true
-        socket.writeString("phoneBat," + String(UIDevice.currentDevice().batteryLevel))
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        socket.write(string:"phoneBat," + String(UIDevice.current.batteryLevel))
     }
 }

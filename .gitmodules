@@ -1,3 +1,6 @@
 [submodule "GPUImage2"]
 	path = GPUImage2
 	url = https://github.com/BradLarson/GPUImage2.git
+[submodule "Starscream"]
+	path = Starscream
+	url = https://github.com/daltoniam/Starscream.git

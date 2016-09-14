@@ -32,7 +32,7 @@ class Optics {
     static let r: Double = 45
     static let d: Double = 45
     
-    static func alpha(beta: Double) -> Double {
+    static func alpha(_ beta: Double) -> Double {
         let Q = M_PI - beta
         let q: Double = sqrt(r*r + d*d - 2*r*d*cos(Q)) // cos rule
         return asin( r * sin(Q) / q) // sin rule sin(alpha) / r = sin(Q) / q

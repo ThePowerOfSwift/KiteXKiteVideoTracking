@@ -10,9 +10,9 @@ import UIKit
 
 class KiteRemotePageViewController: UIPageViewController {
     
-    private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("autopilot"),
-                UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("manual")]
+    fileprivate(set) lazy var orderedViewControllers: [UIViewController] = {
+        return [UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "autopilot"),
+                UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "manual")]
     }()
     
     override func viewDidLoad() {
@@ -22,7 +22,7 @@ class KiteRemotePageViewController: UIPageViewController {
         
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
-                               direction: .Forward,
+                               direction: .forward,
                                animated: true,
                                completion: nil)
         }
@@ -33,17 +33,17 @@ class KiteRemotePageViewController: UIPageViewController {
 
 extension KiteRemotePageViewController {
     
-    func setViewController(index: Int) {
+    func setViewController(_ index: Int) {
         setViewControllers([orderedViewControllers[index]],
-                           direction: .Forward,
+                           direction: .forward,
                            animated: true,
                            completion: nil)
     }
     
     
-    func next(viewController: UIViewController) {
+    func next(_ viewController: UIViewController) {
         
-        guard let viewControllerIndex = orderedViewControllers.indexOf(viewController) else {
+        guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return
         }
         

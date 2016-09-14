@@ -5,12 +5,14 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "0B92740C38C757B3728C0208DC704E6ECFDECB09" : 0,
-    "0A10A05FA17EF4CD5DD9E00FF750F0422B9488CE" : 0
+    "0A10A05FA17EF4CD5DD9E00FF750F0422B9488CE" : 0,
+    "C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6136B752-925D-4D9A-85DB-7EF063BC008C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "0B92740C38C757B3728C0208DC704E6ECFDECB09" : "KiteRemote\/",
-    "0A10A05FA17EF4CD5DD9E00FF750F0422B9488CE" : "KiteRemote\/GPUImage2\/"
+    "0B92740C38C757B3728C0208DC704E6ECFDECB09" : "KiteXKiteVideoTracking\/",
+    "0A10A05FA17EF4CD5DD9E00FF750F0422B9488CE" : "KiteXKiteVideoTracking\/GPUImage2\/",
+    "C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D" : "KiteXKiteVideoTracking\/Starscream\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "KiteRemote",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/aokholm\/KiteTrack.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B92740C38C757B3728C0208DC704E6ECFDECB09"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/daltoniam\/Starscream.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D"
     }
   ]
 }

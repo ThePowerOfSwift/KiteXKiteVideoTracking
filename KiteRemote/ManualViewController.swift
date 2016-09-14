@@ -23,7 +23,7 @@ class ManualViewController: UIViewController {
     var controlInput: Int = 0 {
         didSet {
             let pos = Int16( controlInput + controlOffSet )
-            baseLink.sendData(NSData(bytes: Array(count: 1, repeatedValue: pos), length: 2))
+            baseLink.sendData(Data(bytes: UnsafeRawPointer(Array(repeating: pos, count: 1)), count: 2))
         }
     }
     
@@ -35,8 +35,8 @@ class ManualViewController: UIViewController {
         super.viewDidLoad()
         
         controlView.baseLink = baseLink
-        controlView.next = {
-            if let pagevc = self.parentViewController as? KiteRemotePageViewController {
+        controlView.nextVC = {
+            if let pagevc = self.parent as? KiteRemotePageViewController {
                 pagevc.next(self)
             }
         }
@@ -47,16 +47,16 @@ class ManualViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func zero(sender: UIButton) {
+    @IBAction func zero(_ sender: UIButton) {
         controlOffSet += controlInput
         controlSlider.value = 0.5
     }
     
-    @IBAction func newSliderValue(sender: UISlider) {
+    @IBAction func newSliderValue(_ sender: UISlider) {
         controlInput = Int( Double(sender.value - 0.5) * 2 * 400/40 * controlAmplitude ) // 200 steps per rev, each rev = 80 mm
     }
     
-    @IBAction func newAmplitudeSliderValue(sender: UISlider) {
+    @IBAction func newAmplitudeSliderValue(_ sender: UISlider) {
         controlAmplitude = Double(sender.value) * 600 //
     }
 }
